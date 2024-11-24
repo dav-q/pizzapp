@@ -1,0 +1,30 @@
+[
+  {
+    "id": "chili",
+    "name": "Chili"
+  },
+  {
+    "id": "onion",
+    "name": "Onion"
+  },
+  {
+    "id": "pickle",
+    "name": "Pickle"
+  },
+  {
+    "id": "potato",
+    "name": "Potato"
+  },
+  {
+    "id": "pea",
+    "name": "Pea"
+  },
+  {
+    "id": "olive",
+    "name": "Olive"
+  },
+  {
+    "id": "mushroom",
+    "name": "Mushroom"
+  }
+]

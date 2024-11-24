@@ -1,0 +1,191 @@
+[
+  {
+    "id": 1,
+    "name": "Pepperoni",
+    "description": "Pepperoni, tomato sauce, mozzarella cheese",
+    "image": "pizza-0",
+    "stars": 5,
+    "sizes": [
+      {
+        "size": "small",
+        "price": 8.99
+      },
+      {
+        "size": "medium",
+        "price": 10.99
+      },
+      {
+        "size": "large",
+        "price": 12.99
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Margherita",
+    "description": "Tomato sauce, mozzarella cheese, basil",
+    "image": "pizza-1",
+    "stars": 5,
+    "sizes": [
+      {
+        "size": "small",
+        "price": 7.99
+      },
+      {
+        "size": "medium",
+        "price": 9.99
+      },
+      {
+        "size": "large",
+        "price": 11.99
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Hawaiian",
+    "description": "Ham, pineapple, tomato sauce, mozzarella cheese",
+    "image": "pizza-2",
+    "stars": 5,
+    "sizes": [
+      {
+        "size": "small",
+        "price": 9.99
+      },
+      {
+        "size": "medium",
+        "price": 11.99
+      },
+      {
+        "size": "large",
+        "price": 13.99
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Vegetarian",
+    "description": "Tomato sauce, mozzarella cheese, bell peppers, onions, olives, mushrooms",
+    "image": "pizza-3",
+    "stars": 5,
+    "sizes": [
+      {
+        "size": "small",
+        "price": 8.99
+      },
+      {
+        "size": "medium",
+        "price": 10.99
+      },
+      {
+        "size": "large",
+        "price": 12.99
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Meat Lovers",
+    "description": "Pepperoni, sausage, bacon, tomato sauce, mozzarella cheese",
+    "image": "pizza-4",
+    "stars": 5,
+    "sizes": [
+      {
+        "size": "small",
+        "price": 10.99
+      },
+      {
+        "size": "medium",
+        "price": 12.99
+      },
+      {
+        "size": "large",
+        "price": 14.99
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "BBQ Chicken",
+    "description": "BBQ sauce, chicken, red onions, mozzarella cheese",
+    "image": "pizza-5",
+    "stars": 5,
+    "sizes": [
+      {
+        "size": "small",
+        "price": 9.99
+      },
+      {
+        "size": "medium",
+        "price": 11.99
+      },
+      {
+        "size": "large",
+        "price": 13.99
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Supreme",
+    "description": "Pepperoni, sausage, bell peppers, onions, olives, tomato sauce, mozzarella cheese",
+    "image": "pizza-6",
+    "stars": 5,
+    "sizes": [
+      {
+        "size": "small",
+        "price": 11.99
+      },
+      {
+        "size": "medium",
+        "price": 13.99
+      },
+      {
+        "size": "large",
+        "price": 15.99
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Buffalo Chicken",
+    "description": "Buffalo sauce, chicken, red onions, mozzarella cheese",
+    "image": "pizza-7",
+    "stars": 5,
+    "sizes": [
+      {
+        "size": "small",
+        "price": 9.99
+      },
+      {
+        "size": "medium",
+        "price": 11.99
+      },
+      {
+        "size": "large",
+        "price": 13.99
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Mushroom",
+    "description": "Tomato sauce, mozzarella cheese, mushrooms",
+    "image": "pizza-8",
+    "stars": 5,
+    "sizes": [
+      {
+        "size": "small",
+        "price": 8.99
+      },
+      {
+        "size": "medium",
+        "price": 10.99
+      },
+      {
+        "size": "large",
+        "price": 12.99
+      }
+    ]
+  }
+]
