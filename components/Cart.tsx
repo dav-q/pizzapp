@@ -13,7 +13,7 @@ const Cart: React.FC = () => {
   const { cartCounter } = usePizza();
   return (
     <View style={styles.Container}>
-      <AntDesign name="shoppingcart" size={30} color={Colors.main} />
+      <AntDesign name="shopping-cart" size={30} color={Colors.main} />
       {cartCounter && <Text style={styles.Counter}>{cartCounter}</Text>}
     </View>
   );
