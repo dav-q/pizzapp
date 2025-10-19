@@ -1,19 +1,15 @@
-// @import Dependencies
-import { Image, StyleSheet } from "react-native";
-import { PanGestureHandler } from "react-native-gesture-handler";
+import { Image } from "react-native";
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, {
+  runOnJS,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
 } from "react-native-reanimated";
-// @import Data
 import { toppingImages } from "@/constants/ToppingImages";
-// @import Types
-import { PanGestureHandlerEventPayload } from "react-native-screens";
 import { ToppingDraggableComponentType } from "@/types/ToppingType";
-// @import Css
 import { draggableToppingStyles } from "@/styles/ToppingStyles";
-
+import { scheduleOnRN } from "react-native-worklets";
 export default function ToppingDraggable({
   setIsOverDropZone,
   dropZoneLayout,
@@ -23,19 +19,11 @@ export default function ToppingDraggable({
   const translateX = useSharedValue(0);
   const translateY = useSharedValue(0);
 
-  const animatedStyle = useAnimatedStyle(() => ({
-    transform: [
-      { translateX: translateX.value },
-      { translateY: translateY.value },
-    ],
-  }));
-
-  const handleGestureEvent = (event: PanGestureHandlerEventPayload) => {
-    translateX.value = event.translationX;
-    translateY.value = event.translationY;
-  };
   const checkToppingZone = (gestureX: number, gestureY: number) => {
-    const { x, y, width, height } = dropZoneLayout.value;
+    "worklet";
+    const layout = dropZoneLayout.value;
+    if (!layout) return false;
+    const { x, y, width, height } = layout;
     return (
       gestureX >= x &&
       gestureX <= x + width &&
@@ -43,19 +31,31 @@ export default function ToppingDraggable({
       gestureY <= y + height
     );
   };
-  const handleEnded = (event: PanGestureHandlerEventPayload) => {
-    const insideDropZone = checkToppingZone(event.absoluteX, event.absoluteY);
-    setIsOverDropZone({ insideDropZone, toppingData });
-    translateX.value = withSpring(0);
-    translateY.value = withSpring(0);
-  };
+
+  const panGesture = Gesture.Pan()
+    .onBegin(() => {
+      scheduleOnRN(startDragging);
+    })
+    .onUpdate((event) => {
+      translateX.value = event.translationX;
+      translateY.value = event.translationY;
+    })
+    .onEnd((event) => {
+      const insideDropZone = checkToppingZone(event.absoluteX, event.absoluteY);
+      runOnJS(setIsOverDropZone)({ insideDropZone, toppingData });
+      translateX.value = withSpring(0);
+      translateY.value = withSpring(0);
+    });
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [
+      { translateX: translateX.value },
+      { translateY: translateY.value },
+    ],
+  }));
 
   return (
-    <PanGestureHandler
-      onGestureEvent={(event) => handleGestureEvent(event.nativeEvent)}
-      onEnded={(event: any) => handleEnded(event.nativeEvent)}
-      onBegan={startDragging}
-    >
+    <GestureDetector gesture={panGesture}>
       <Animated.View
         style={[draggableToppingStyles.ToppingButton, animatedStyle]}
       >
@@ -64,6 +64,6 @@ export default function ToppingDraggable({
           style={{ width: 30, height: 30 }}
         />
       </Animated.View>
-    </PanGestureHandler>
+    </GestureDetector>
   );
 }

@@ -1,5 +1,5 @@
 // @import Dependencies
-import { Pressable, Text, View } from "react-native";
+import { Text, View } from "react-native";
 // @import Context
 import { usePizza } from "@/context/Pizza";
 // @import Css

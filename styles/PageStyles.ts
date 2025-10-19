@@ -50,6 +50,7 @@ export const pizzaPageDetailStyles = StyleSheet.create({
     backgroundColor: Colors.whiteDraggable,
     marginRight: 20,
     marginLeft: 20,
+    position: "relative",
   },
   DraggablePizzaContainer: {
     justifyContent: "center",
@@ -61,8 +62,9 @@ export const pizzaPageDetailStyles = StyleSheet.create({
   DraggableToppingsContainer: {
     backgroundColor: "transparent",
     position: "absolute",
-    height: "90%",
+    height: "100%",
     zIndex: 1,
+    bottom: "-15%",
   },
   DraggableToppingsCarousel: {
     height: "110%",
