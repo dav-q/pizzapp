@@ -62,15 +62,17 @@ export const pizzaPageDetailStyles = StyleSheet.create({
   DraggableToppingsContainer: {
     backgroundColor: "transparent",
     position: "absolute",
-    height: "100%",
+    overflow: "visible",
+    height: 100,
     zIndex: 1,
-    bottom: "-15%",
+    bottom: 0,
+    left: 60,
+    right: 60,
   },
   DraggableToppingsCarousel: {
-    height: "110%",
     backgroundColor: "transparent",
     marginLeft: 50,
-    bottom: 210,
+    overflow: "visible",
   },
   OrderButtonContainer: {
     backgroundColor: Colors.whiteDraggable,

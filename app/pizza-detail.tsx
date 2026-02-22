@@ -3,6 +3,7 @@ import React from "react";
 import { Tabs } from "expo-router";
 import { Text, View } from "react-native";
 import { router } from "expo-router";
+import { CopilotProvider } from "react-native-copilot";
 // @import Context
 import { usePizza } from "@/context/Pizza";
 // @import Css
@@ -25,39 +26,47 @@ export default function PizzaDetail() {
   };
 
   return (
-    <View>
-      <Tabs.Screen
-        options={{
-          title: "",
-          headerShown: true,
-          animation: "fade",
-          headerRight: () => {
-            return (
-              <Text>
-                <Cart />
-              </Text>
-            );
-          },
-          headerLeft: () => {
-            return (
-              <View style={styles.TabHeaderLeft}>
-                <SimpleLineIcons
-                  name="arrow-left"
-                  size={24}
-                  color={Colors.main}
-                  onPress={handleBack}
-                />
-                <Text style={styles.TabHeaderLeftText} numberOfLines={1}>
-                  {selectedPizza?.name}
+    <CopilotProvider
+      labels={{
+        finish: "Ok",
+      }}
+      stopOnOutsideClick
+      stepNumberComponent={() => null}
+    >
+      <View>
+        <Tabs.Screen
+          options={{
+            title: "",
+            headerShown: true,
+            animation: "fade",
+            headerRight: () => {
+              return (
+                <Text>
+                  <Cart />
                 </Text>
-              </View>
-            );
-          },
-          headerShadowVisible: false,
-          headerStyle: styles.TabHeaderStyle,
-        }}
-      />
-      <PizzaDetailPage />
-    </View>
+              );
+            },
+            headerLeft: () => {
+              return (
+                <View style={styles.TabHeaderLeft}>
+                  <SimpleLineIcons
+                    name="arrow-left"
+                    size={24}
+                    color={Colors.main}
+                    onPress={handleBack}
+                  />
+                  <Text style={styles.TabHeaderLeftText} numberOfLines={1}>
+                    {selectedPizza?.name}
+                  </Text>
+                </View>
+              );
+            },
+            headerShadowVisible: false,
+            headerStyle: styles.TabHeaderStyle,
+          }}
+        />
+        <PizzaDetailPage />
+      </View>
+    </CopilotProvider>
   );
 }
