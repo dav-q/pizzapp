@@ -4,6 +4,7 @@ import { Dimensions, LayoutChangeEvent, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { useSharedValue } from "react-native-reanimated";
 import Carousel from "react-native-reanimated-carousel";
+import { CopilotStep, useCopilot, walkthroughable } from "react-native-copilot";
 // @import Css
 import { pizzaPageDetailStyles as pageStyles } from "@/styles/PageStyles";
 import {
@@ -24,18 +25,20 @@ import toppingData from "@/data/topping-mock.json";
 // @import Types
 import { InsideToppingDataType, ToppingDataType } from "@/types/ToppingType";
 
+const CopilotView = walkthroughable(View);
+
 export default function PizzaDetail() {
   const { selectedPizza } = usePizza();
+  const { start } = useCopilot();
   const [totalToppings, setTotalToppings] = useState<number>(0);
   const [startBoxTransition, setStartBoxTransition] = useState<boolean>(false);
   const [toppingsSelected, setToppingsSelected] = useState<ToppingDataType[]>(
-    []
+    [],
   );
   const [isDragging, setIsDragging] = useState<boolean>(false);
   const dropZoneLayout = useSharedValue({ x: 0, y: 0, width: 0, height: 0 });
   const itemSize = 80;
   const pageWidth = Dimensions.get("window").width;
-  const pageHeight = Dimensions.get("window").height;
 
   const handleDropZoneLayout = (event: LayoutChangeEvent) => {
     event.target.measure((x, y, width, height, pageX, pageY) => {
@@ -68,14 +71,7 @@ export default function PizzaDetail() {
   };
 
   const renderTopping = (topping: ToppingDataType) => (
-    <View
-      style={[
-        toppingStyles.DraggableContainer,
-        {
-          marginTop: pageHeight - 200,
-        },
-      ]}
-    >
+    <View style={toppingStyles.DraggableContainer}>
       <ToppingDraggable
         setIsOverDropZone={handleDropZone}
         dropZoneLayout={dropZoneLayout}
@@ -86,7 +82,7 @@ export default function PizzaDetail() {
   );
 
   return (
-    <View style={pageStyles.ScreenContainer}>
+    <View style={pageStyles.ScreenContainer} onLayout={() => start()}>
       <View
         style={[
           pageStyles.DraggableContainer,
@@ -118,21 +114,34 @@ export default function PizzaDetail() {
       </View>
       <View style={pageStyles.DraggableToppingsContainer}>
         <GestureHandlerRootView>
-          <Carousel
-            width={itemSize}
-            height={itemSize}
-            style={[
-              pageStyles.DraggableToppingsCarousel,
-              {
-                width: pageWidth,
-                zIndex: isDragging ? 1 : -1,
-              },
-            ]}
-            data={toppingData as ToppingDataType[]}
-            renderItem={({ item }: { item: ToppingDataType }) =>
-              renderTopping(item)
-            }
-          />
+          <CopilotStep
+            text="Drag the toppings to your pizza 👆"
+            order={1}
+            name="drag-topping"
+          >
+            <CopilotView
+              style={{
+                height: 50,
+                width: "100%",
+              }}
+            >
+              <Carousel
+                width={itemSize}
+                height={itemSize}
+                style={[
+                  pageStyles.DraggableToppingsCarousel,
+                  {
+                    width: pageWidth,
+                    zIndex: isDragging ? 1 : -1,
+                  },
+                ]}
+                data={toppingData as ToppingDataType[]}
+                renderItem={({ item }: { item: ToppingDataType }) =>
+                  renderTopping(item)
+                }
+              />
+            </CopilotView>
+          </CopilotStep>
         </GestureHandlerRootView>
       </View>
       <View style={pageStyles.OrderButtonContainer}>
